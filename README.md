@@ -45,7 +45,7 @@ Copiar código
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
 ### 2️⃣ Levantar el Entorno
-bash
+```bash
 Copiar código
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
 docker-compose up -d --build
@@ -56,13 +56,13 @@ docker-compose up -d --build
 ### 3️⃣ Acceder a Tomcat
 Abre en tu navegador:
 
-arduino
+```arduino
 Copiar código
 http://localhost:8085
 ### 4️⃣ Acceder a MySQL
 Desde tu PC (Workbench, DBeaver, etc.):
 
-yaml
+```yaml
 Copiar código
 Host: localhost
 Puerto: 3309
@@ -71,7 +71,7 @@ Contraseña: apppass
 Base de datos: appdb
 Dentro del contenedor Java:
 
-yaml
+```yaml
 Copiar código
 Host: bd-mysql
 Puerto: 3306
@@ -83,7 +83,7 @@ Abre el archivo app/src/main/webapp/hola.jsp
 
 Accede en el navegador:
 
-bash
+```bash
 Copiar código
 http://localhost:8085/hola.jsp
 Debes ver un mensaje "Hola Mundo JSP con Docker"
@@ -95,7 +95,7 @@ Los cambios en los JSP se reflejan automáticamente gracias al volumen montado:
 
 ### 📄 Composición de Archivos Importantes
 docker-compose.yml
-yaml
+```yaml
 Copiar código
 version: '3.9'
 
@@ -201,12 +201,12 @@ Copiar código
 </body>
 </html>
 ### 🧹 Detener y Limpiar
-bash
+```bash
 Copiar código
 docker-compose down
 Para reiniciar la base de datos:
 
-bash
+```bash
 Copiar código
 docker-compose down -v
 ### 💡 Buenas prácticas
