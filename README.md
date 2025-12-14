@@ -1,14 +1,12 @@
-# Java&VSCode
+# Java & VSCode
 Proyecto Java Web con Docker y Tomcat
 
-🚀 EMV 1: Entorno de Desarrollo Java Web con Docker
+🚀 **EMV 1: Entorno de Desarrollo Java Web con Docker**  
 Este proyecto proporciona un Entorno Mínimo Viable (EMV) para el desarrollo de aplicaciones Java web usando JSP, completamente aislado y configurable gracias a Docker y Tomcat. Incluye una base de datos MySQL para pruebas y desarrollo local.
 
 ---
 
 ## 📁 Estructura del Proyecto
-
-Crea la siguiente estructura de carpetas:
 
 proyecto-docker-java/
 ├── app/
@@ -35,7 +33,7 @@ Copiar código
 
 - Docker Desktop (o Docker Engine)
 - Visual Studio Code (opcional, para edición)
-- Extensión VS Code: Remote - Containers (opcional, ID: ms-vscode-remote.remote-containers)
+- Extensión VS Code: Remote - Containers (opcional, ID: `ms-vscode-remote.remote-containers`)
 
 ---
 
@@ -46,7 +44,7 @@ Copiar código
 ```bash
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
-###2️⃣ Levantar el Entorno
+### 2️⃣ Levantar el Entorno
 bash
 Copiar código
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
@@ -55,16 +53,15 @@ docker-compose up -d --build
 
 -v elimina volúmenes antiguos para que se ejecute init.sql.
 
-###3️⃣ Acceder a Tomcat
+### 3️⃣ Acceder a Tomcat
 Abre en tu navegador:
 
 arduino
 Copiar código
 http://localhost:8085
-###4️⃣ Acceder a MySQL
+### 4️⃣ Acceder a MySQL
 Desde tu PC (Workbench, DBeaver, etc.):
 
-###Archivo docker-compose.yml
 yaml
 Copiar código
 Host: localhost
@@ -81,7 +78,7 @@ Puerto: 3306
 Usuario: appuser
 Contraseña: apppass
 Base de datos: appdb
-🧪 Prueba de funcionamiento (Hola Mundo JSP)
+### 🧪 Prueba de funcionamiento (Hola Mundo JSP)
 Abre el archivo app/src/main/webapp/hola.jsp
 
 Accede en el navegador:
@@ -93,32 +90,70 @@ Debes ver un mensaje "Hola Mundo JSP con Docker"
 
 También se muestran los datos de la tabla prueba desde MySQL
 
-Los cambios en los JSP se reflejan automáticamente gracias al volumen montado (./app/src:/usr/local/tomcat/webapps/ROOT).
+Los cambios en los JSP se reflejan automáticamente gracias al volumen montado:
+./app/src:/usr/local/tomcat/webapps/ROOT
 
-###📄 Composición de Archivos Importantes
+### 📄 Composición de Archivos Importantes
 docker-compose.yml
-Define los servicios de Tomcat (app) y MySQL (bd-mysql):
+yaml
+Copiar código
+version: '3.9'
 
-app: servidor Tomcat con driver JDBC incluido
+services:
+  app:
+    build: ./app
+    container_name: java-tomcat
+    ports:
+      - "8085:8080"
+    volumes:
+      - ./app/src:/usr/local/tomcat/webapps/ROOT
+    environment:
+      DB_HOST: bd-mysql
+      DB_NAME: appdb
+      DB_USER: appuser
+      DB_PASSWORD: apppass
+    depends_on:
+      - bd-mysql
+    networks:
+      - java-net
 
-bd-mysql: MySQL 8, puerto 3309 en host, inicializa con db/init.sql
+  bd-mysql:
+    image: mysql:8.0
+    container_name: bd-mysql
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - java-net
 
-Red interna java-net
+volumes:
+  mysql_data:
 
-Volumen persistente mysql_data
+networks:
+  java-net:
+    driver: bridge
+app/Dockerfile
+dockerfile
+Copiar código
+FROM tomcat:10.1-jdk17-temurin
 
-Dockerfile (app/Dockerfile)
-Base: tomcat:10.1-jdk17-temurin
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-Copia la aplicación JSP y el driver JDBC (mysql-connector-java-8.1.0.jar)
+COPY src/main/webapp /usr/local/tomcat/webapps/ROOT
+COPY src/main/webapp/WEB-INF/lib/mysql-connector-java-8.1.0.jar /usr/local/tomcat/lib/
 
-Expone puerto 8080 en contenedor
+EXPOSE 8080
 
-Comando: catalina.sh run
-
+CMD ["catalina.sh", "run"]
 db/init.sql
-###Script de inicialización de MySQL:
-
 sql
 Copiar código
 CREATE DATABASE IF NOT EXISTS appdb;
@@ -132,9 +167,7 @@ CREATE TABLE IF NOT EXISTS prueba (
 
 INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
-Ejemplo de JSP que se conecta a MySQL:
-
-###jsp
+jsp
 Copiar código
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -167,18 +200,16 @@ Copiar código
 %>
 </body>
 </html>
-###🧹 Detener y limpiar
-Salir del entorno:
-
+### 🧹 Detener y Limpiar
 bash
 Copiar código
 docker-compose down
-Limpiar volúmenes (opcional, para reiniciar la base de datos):
+Para reiniciar la base de datos:
 
 bash
 Copiar código
 docker-compose down -v
-###💡 Buenas prácticas
+### 💡 Buenas prácticas
 Mantener los JSP en src/main/webapp/
 
 Mantener scripts SQL en db/init.sql
