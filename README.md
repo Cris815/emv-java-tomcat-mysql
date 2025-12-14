@@ -12,13 +12,13 @@ proyecto-docker-java/
 ├── app/
 │ ├── Dockerfile
 │ └── src/
-│ └── main/
-│ └── webapp/
-│ ├── index.jsp
-│ ├── hola.jsp
-│ └── WEB-INF/
-│ └── lib/
-│ └── mysql-connector-java-8.1.0.jar
+│   └── main/
+│     └── webapp/
+│       ├── index.jsp
+│       ├── hola.jsp
+│       └── WEB-INF/
+│         └── lib/
+│           └── mysql-connector-java-8.1.0.jar
 ├── db/
 │ └── init.sql
 ├── docker-compose.yml
@@ -154,7 +154,7 @@ EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
 db/init.sql
-sql
+### sql
 Copiar código
 CREATE DATABASE IF NOT EXISTS appdb;
 
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS prueba (
 
 INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
-jsp
+### jsp
 Copiar código
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
