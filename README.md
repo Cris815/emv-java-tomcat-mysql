@@ -46,7 +46,7 @@ Copiar código
 ```bash
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
-2️⃣ Levantar el Entorno
+###2️⃣ Levantar el Entorno
 bash
 Copiar código
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
@@ -55,15 +55,16 @@ docker-compose up -d --build
 
 -v elimina volúmenes antiguos para que se ejecute init.sql.
 
-3️⃣ Acceder a Tomcat
+###3️⃣ Acceder a Tomcat
 Abre en tu navegador:
 
 arduino
 Copiar código
 http://localhost:8085
-4️⃣ Acceder a MySQL
+###4️⃣ Acceder a MySQL
 Desde tu PC (Workbench, DBeaver, etc.):
 
+###Archivo docker-compose.yml
 yaml
 Copiar código
 Host: localhost
@@ -94,7 +95,7 @@ También se muestran los datos de la tabla prueba desde MySQL
 
 Los cambios en los JSP se reflejan automáticamente gracias al volumen montado (./app/src:/usr/local/tomcat/webapps/ROOT).
 
-📄 Composición de Archivos Importantes
+###📄 Composición de Archivos Importantes
 docker-compose.yml
 Define los servicios de Tomcat (app) y MySQL (bd-mysql):
 
@@ -116,7 +117,7 @@ Expone puerto 8080 en contenedor
 Comando: catalina.sh run
 
 db/init.sql
-Script de inicialización de MySQL:
+###Script de inicialización de MySQL:
 
 sql
 Copiar código
@@ -133,7 +134,7 @@ INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
 Ejemplo de JSP que se conecta a MySQL:
 
-jsp
+###jsp
 Copiar código
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -166,7 +167,7 @@ Copiar código
 %>
 </body>
 </html>
-🧹 Detener y limpiar
+###🧹 Detener y limpiar
 Salir del entorno:
 
 bash
@@ -177,7 +178,7 @@ Limpiar volúmenes (opcional, para reiniciar la base de datos):
 bash
 Copiar código
 docker-compose down -v
-💡 Buenas prácticas
+###💡 Buenas prácticas
 Mantener los JSP en src/main/webapp/
 
 Mantener scripts SQL en db/init.sql
