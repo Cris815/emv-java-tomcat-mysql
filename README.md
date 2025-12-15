@@ -52,13 +52,14 @@ Abre en tu navegador: http://localhost:8085
 ---
 ### 4️⃣ Acceder a MySQL
 Desde tu PC abre Workbench y crea una nueva conexión.
-
+```text
 Host: localhost
 Puerto: 3309
 Usuario: appuser
 Contraseña: apppass
 Base de datos: appdb
 Dentro del contenedor Java:
+```
 
 ---
 ### 🧪 Prueba de funcionamiento (Hola Mundo JSP)
