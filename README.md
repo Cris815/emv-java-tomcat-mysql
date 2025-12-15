@@ -55,14 +55,10 @@ docker-compose up -d --build
 
 ### 3️⃣ Acceder a Tomcat
 Abre en tu navegador:
-
-```arduino
-Copiar código
 http://localhost:8085
 ### 4️⃣ Acceder a MySQL
 Desde tu PC (Workbench, DBeaver, etc.):
 
-```yaml
 Copiar código
 Host: localhost
 Puerto: 3309
@@ -71,7 +67,6 @@ Contraseña: apppass
 Base de datos: appdb
 Dentro del contenedor Java:
 
-```yaml
 Copiar código
 Host: bd-mysql
 Puerto: 3306
@@ -82,9 +77,6 @@ Base de datos: appdb
 Abre el archivo app/src/main/webapp/hola.jsp
 
 Accede en el navegador:
-
-```bash
-Copiar código
 http://localhost:8085/hola.jsp
 Debes ver un mensaje "Hola Mundo JSP con Docker"
 
@@ -95,7 +87,6 @@ Los cambios en los JSP se reflejan automáticamente gracias al volumen montado:
 
 ### 📄 Composición de Archivos Importantes
 docker-compose.yml
-```yaml
 Copiar código
 version: '3.9'
 
@@ -168,7 +159,6 @@ CREATE TABLE IF NOT EXISTS prueba (
 INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
 ### jsp
-```jsp
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -200,16 +190,12 @@ app/src/main/webapp/hola.jsp
 %>
 </body>
 </html>
----
+
 ### 🧹 Detener y Limpiar
-```bash
-Copiar código
 docker-compose down
 Para reiniciar la base de datos:
-
-```bash
-Copiar código
 docker-compose down -v
+
 ### 💡 Buenas prácticas
 Mantener los JSP en src/main/webapp/
 
