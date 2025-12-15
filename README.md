@@ -44,8 +44,9 @@ Copiar código
 ```bash
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
-### 2️⃣ Levantar el Entorno
 ```bash
+### 2️⃣ Levantar el Entorno
+
 Copiar código
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
 docker-compose up -d --build
