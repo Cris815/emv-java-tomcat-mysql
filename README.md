@@ -1,4 +1,4 @@
-# Java, Tomcat y MySQL
+# EMV Java
 Proyecto Java Web con Docker y Tomcat, y una base de datos MySQL
 
 ---
@@ -46,7 +46,7 @@ git clone [URL_DE_TU_REPOSITORIO]
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
 docker-compose up -d --build
 ```
-
+- En caso de que al iniciar el entorno el puerto de la aplicación o de la base de datos se encuentre en uso, deberá modificarse a uno disponible en el archivo docker-compose.yml.
 ---
 ### 3️⃣ Acceder a Tomcat
 Abre en tu navegador: http://localhost:8085
