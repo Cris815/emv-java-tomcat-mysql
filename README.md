@@ -44,7 +44,7 @@ Copiar código
 ```bash
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
-```bash
+---
 ### 2️⃣ Levantar el Entorno
 
 Copiar código
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS prueba (
 INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
 ### jsp
-Copiar código
+```jsp
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -201,6 +201,7 @@ Copiar código
 %>
 </body>
 </html>
+---
 ### 🧹 Detener y Limpiar
 ```bash
 Copiar código
