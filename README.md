@@ -18,7 +18,7 @@ proyecto-docker-java/
 │               ├── hola.jsp
 │               └── WEB-INF/
 │                   └── lib/
-│                       └── mysql-connector-java-8.1.0.jar
+│                       └── mysql-connector-j-8.1.0.jar
 ├── db/
 │   └── init.sql
 ├── docker-compose.yml
