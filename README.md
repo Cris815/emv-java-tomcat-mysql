@@ -202,3 +202,52 @@ Mantener los JSP en src/main/webapp/
 Mantener scripts SQL en db/init.sql
 
 Usar bd-mysql como host en Java, no localhost
+
+### Archivos
+#### docker-compose.yml
+```yaml
+version: '3.9'
+
+services:
+  app:
+    build: ./app
+    container_name: java-tomcat
+    ports:
+      - "8085:8080"
+    environment:
+      DB_HOST: bd-mysql
+      DB_NAME: appdb
+      DB_USER: appuser
+      DB_PASSWORD: apppass
+    depends_on:
+      - bd-mysql
+    networks:
+      - java-net
+
+  bd-mysql:
+    image: mysql:8.0
+    container_name: bd-mysql
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - java-net
+
+volumes:
+  mysql_data:
+
+networks:
+  java-net:
+    driver: bridge
+
+
+####
