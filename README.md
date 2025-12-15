@@ -58,16 +58,16 @@ Puerto: 3309
 Usuario: appuser
 Contraseña: apppass
 Base de datos: appdb
-Dentro del contenedor Java:
 ```
 
 ---
 ### 🧪 Prueba de funcionamiento (Hola Mundo JSP)
 
-Accede en el navegador: http://localhost:8085/hola.jsp
-Debes ver un mensaje "Hola Mundo JSP con Docker"
+-Accede en el navegador: http://localhost:8085/hola.jsp
 
-También se muestran los datos de la tabla prueba desde MySQL
+-Debes ver un mensaje "Hola Mundo JSP con Docker"
+
+-También se muestran los datos de la tabla prueba desde MySQL
 
 ---
 ### 📄 Composición de Archivos Importantes
