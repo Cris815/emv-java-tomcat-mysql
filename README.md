@@ -10,17 +10,17 @@ Este proyecto proporciona un Entorno Mínimo Viable (EMV) para el desarrollo de 
 
 proyecto-docker-java/
 ├── app/
-│ ├── Dockerfile
-│ └── src/
-│   └── main/
-│     └── webapp/
-│       ├── index.jsp
-│       ├── hola.jsp
-│       └── WEB-INF/
-│         └── lib/
-│           └── mysql-connector-java-8.1.0.jar
+│   ├── Dockerfile
+│   └── src/
+│       └── main/
+│           └── webapp/
+│               ├── index.jsp
+│               ├── hola.jsp
+│               └── WEB-INF/
+│                   └── lib/
+│                       └── mysql-connector-java-8.1.0.jar
 ├── db/
-│ └── init.sql
+│   └── init.sql
 ├── docker-compose.yml
 └── README.md
 
@@ -41,7 +41,6 @@ Copiar código
 
 ### 1️⃣ Clonar el Repositorio
 
-```bash
 git clone [URL_DE_TU_REPOSITORIO] proyecto-docker-java
 cd proyecto-docker-java
 ---
