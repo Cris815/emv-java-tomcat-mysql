@@ -44,8 +44,6 @@ git clone [URL_DE_TU_REPOSITORIO]
 docker-compose down -v       # opcional: limpia datos antiguos de MySQL
 docker-compose up -d --build
 ```
---build recompila la imagen de Tomcat con el driver JDBC.
--v elimina volúmenes antiguos para que se ejecute init.sql.
 
 ---
 ### 3️⃣ Acceder a Tomcat
