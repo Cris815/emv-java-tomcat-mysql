@@ -1,7 +1,9 @@
-# Java & VSCode
-Proyecto Java Web con Docker y Tomcat
+# Java, Tomcat y MySQL
+Proyecto Java Web con Docker y Tomcat, y una base de datos MySQL
 
-🚀 **EMV 1: Entorno de Desarrollo Java Web con Docker**  
+---
+
+🚀 **EMV: Entorno de Desarrollo Java Web con Docker**  
 Este proyecto proporciona un Entorno Mínimo Viable (EMV) para el desarrollo de aplicaciones Java web usando JSP, completamente aislado y configurable gracias a Docker y Tomcat. Incluye una base de datos MySQL para pruebas y desarrollo local.
 
 ---
