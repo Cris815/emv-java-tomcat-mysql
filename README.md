@@ -206,9 +206,9 @@ INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 
 ---
 ### 🧹 Detener y Limpiar
-docker-compose down
+`docker-compose down`
 Para reiniciar la base de datos:
-docker-compose down -v
+`docker-compose down -v`
 
 ### 💡 Buenas prácticas
 Mantener los JSP en src/main/webapp/
