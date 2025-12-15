@@ -24,9 +24,6 @@ proyecto-docker-java/
 ├── docker-compose.yml
 └── README.md
 
-yaml
-Copiar código
-
 ---
 
 ## 🛠️ Requisitos
@@ -159,6 +156,7 @@ CREATE TABLE IF NOT EXISTS prueba (
 INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
 app/src/main/webapp/hola.jsp
 ### jsp
+```jsp
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -190,7 +188,8 @@ app/src/main/webapp/hola.jsp
 %>
 </body>
 </html>
-
+```
+---
 ### 🧹 Detener y Limpiar
 docker-compose down
 Para reiniciar la base de datos:
@@ -248,6 +247,94 @@ volumes:
 networks:
   java-net:
     driver: bridge
+```
 
+#### Dockerfile
+```dockerfile
+FROM tomcat:10.1-jdk17-temurin
 
-####
+# Limpiar aplicaciones por defecto
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copiar aplicación web
+COPY src/main/webapp /usr/local/tomcat/webapps/ROOT
+
+# Copiar driver JDBC a Tomcat lib
+COPY src/main/webapp/WEB-INF/lib/mysql-connector-j-8.1.0.jar /usr/local/tomcat/lib/
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
+```
+---
+#### index.jsp
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+<title>Entorno Docker Java</title>
+</head>
+<body>
+<h1>🚀 Tomcat funcionando con Docker</h1>
+<p>Java: OpenJDK 17</p>
+<p>Servidor: Apache Tomcat 10</p>
+</body>
+</html>
+```
+---
+
+#### hola.jsp
+```jsp
+<%@ page import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Prueba Hola Mundo</title>
+</head>
+<body>
+<h1>🚀 Hola Mundo JSP con Docker!</h1>
+
+<%
+    String dbUrl = "jdbc:mysql://bd-mysql:3306/appdb";
+    String dbUser = "appuser";
+    String dbPass = "apppass";
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM prueba");
+
+        out.println("<h2>Datos desde MySQL:</h2><ul>");
+        while(rs.next()) {
+            out.println("<li>" + rs.getInt("id") + " - " + rs.getString("mensaje") + "</li>");
+        }
+        out.println("</ul>");
+
+        rs.close();
+        stmt.close();
+        conn.close();
+    } catch(Exception e) {
+        out.println("<p style='color:red;'>Error de conexión: " + e.getMessage() + "</p>");
+    }
+%>
+
+</body>
+</html>
+```
+---
+
+#### init.sql
+```sql
+CREATE DATABASE IF NOT EXISTS appdb;
+
+USE appdb;
+
+CREATE TABLE IF NOT EXISTS prueba (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mensaje VARCHAR(255)
+);
+
+INSERT INTO prueba (mensaje) VALUES ('Hola desde Docker!'), ('Prueba JDBC');
+```
+
