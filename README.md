@@ -7,7 +7,7 @@ Este proyecto proporciona un Entorno Mínimo Viable (EMV) para el desarrollo de 
 ---
 
 ## 📁 Estructura del Proyecto
-
+```text
 proyecto-docker-java/
 ├── app/
 │   ├── Dockerfile
@@ -23,6 +23,7 @@ proyecto-docker-java/
 │   └── init.sql
 ├── docker-compose.yml
 └── README.md
+```
 
 ---
 
@@ -248,7 +249,7 @@ networks:
   java-net:
     driver: bridge
 ```
-
+---
 #### Dockerfile
 ```dockerfile
 FROM tomcat:10.1-jdk17-temurin
@@ -282,7 +283,6 @@ CMD ["catalina.sh", "run"]
 </html>
 ```
 ---
-
 #### hola.jsp
 ```jsp
 <%@ page import="java.sql.*" %>
@@ -323,7 +323,6 @@ CMD ["catalina.sh", "run"]
 </html>
 ```
 ---
-
 #### init.sql
 ```sql
 CREATE DATABASE IF NOT EXISTS appdb;
